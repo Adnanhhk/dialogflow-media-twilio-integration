@@ -25,10 +25,12 @@ const listener = app.listen(process.env.PORT, function() {
 
 app.post('/', async function(req, res) {
   const body = req.body;
-  if (req.body.NumMedia != "0"){
-    body = req.body.MediaUrl0;
+  const mediaurl = body.MediaUrl0;
+  if (body.NumMedia != "0"){
+    const text = body.MediaUrl0;
+  } else {
+    const text = body.Body;
   }
-  const text = body.Body;
   const id = body.From;
   const dialogflowResponse = (await sessionClient.detectIntent(
       text, id, body)).fulfillmentText;
